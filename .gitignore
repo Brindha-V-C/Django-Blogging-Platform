@@ -1,0 +1,4 @@
+env\*
+todo\__pycache__\
+todo\migrations\__pycache__
+todo_main\__pycache__
