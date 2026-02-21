@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from .models import Blog, Category
 
 def post_by_category(request, category_id):
@@ -20,3 +20,13 @@ def post_by_category(request, category_id):
     }
 
     return render(request, 'post_by_category.html', context)
+
+
+def single_blog(request, slug):
+    blog = get_object_or_404(Blog, slug=slug, status="Published")
+
+    context = {
+        'blog': blog
+    }
+
+    return render(request, 'single_blog.html', context)
