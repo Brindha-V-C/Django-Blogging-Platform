@@ -1,25 +1,25 @@
 {% extends 'base.html' %}
 
-{% block content %} 
+{% block content %}
 
-  <!--Category Posts-->
-  <h3 class="text-uppercase text-warning" style="letter-spacing: 2px;">Category - {{ category_name }}</h3>
+<h3 class="text-uppercase text-warning" style="letter-spacing: 2px;">Search Results for {{ keyword }}</h3>
   <br>
   <div class="row mb-2">
-    {% if posts %}
-    {% for post in posts %}
+    {% if blogs %}
+    {% for post in blogs %}
         <div class="col-md-6">
           <div class="card border-0" >
             <div class="card-body">
-              <h3><a href="{% url 'single_blog' post.slug %}" class="text-dark">{{ post.title }}</a></h3>
+              <h3><a href="{% url 'search' %}" class="text-dark">{{ post.title }}</a></h3>
               <small class="mb-1 text-muted">{{ post.created_at | timesince}} ago | {{ post.author }}</small>
               <p class="card-text">{{ post.short_description | truncatewords:19 }}</p>
             </div>
           </div>
         </div>
+        <br>
     {% endfor %}
     {% else %}
-       <p>No post for this category</p>
+       <p>No post for this keyword</p>
     {% endif %}
   </div>
 
