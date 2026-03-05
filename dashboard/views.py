@@ -43,14 +43,18 @@ def add_category(request):
 def edit_category(request, pk):
     category = get_object_or_404(Category, pk=pk)
 
+    form = CategoryForm(instance=category)
+
     if request.method == 'POST':
-        new_cat = request.POST['category_name']
-        category.category_name = new_cat            
-        category.save()
-        return redirect('categories')
+        form = CategoryForm(request.POST, instance = category)
+
+        if form.is_valid():
+            form.save()
+            return redirect('categories')
 
     context ={
-        'category': category
+        'category': category,
+        'form': form
     }
 
     return render(request, 'dashboard/edit_category.html', context)
