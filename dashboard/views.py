@@ -19,7 +19,7 @@ def dashboard(request):
     
     return render(request, 'dashboard/dashboard.html', context)
 
-
+#Category CRUD
 def categories(request):
     return render(request, 'dashboard/categories.html')
 
@@ -66,3 +66,13 @@ def delete_category(request, pk):
     category.delete()
 
     return redirect('categories')
+
+
+#Posts CRUD
+def posts(request):
+    posts = Blog.objects.all()
+
+    context = {
+        'posts': posts
+    }
+    return render(request, 'dashboard/posts.html', context)
