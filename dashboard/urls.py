@@ -12,5 +12,6 @@ urlpatterns = [
 
     #Blog Posts CRUD
     path('posts/', views.posts, name='posts'),
-    path('posts/add/', views.add_posts, name='add_posts'),  
+    path('posts/add/', views.add_posts, name='add_posts'),
+    path('posts/edit/<int:pk>', views.edit_post, name='edit_post')  
 ] 

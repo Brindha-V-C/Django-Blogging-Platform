@@ -100,3 +100,11 @@ def add_posts(request):
     }
 
     return render(request, 'dashboard/add_post.html', context)
+
+def edit_post(request, pk):
+    post = get_object_or_404(Blog, pk=pk)
+
+    context ={
+        'post': post
+    }
+    return render(request, 'dashboard/edit_post.html', context)
