@@ -11,5 +11,6 @@ urlpatterns = [
     path('categories/delete/<int:pk>', views.delete_category, name='delete_category'),
 
     #Blog Posts CRUD
-    path('posts/', views.posts, name='posts')   
+    path('posts/', views.posts, name='posts'),
+    path('posts/add/', views.add_posts, name='add_posts'),  
 ] 
