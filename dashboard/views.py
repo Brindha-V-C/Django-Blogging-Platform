@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from blogs.models import Blog, Category
 from django.contrib.auth.decorators import login_required
 from django.template.defaultfilters import slugify
+from django.contrib.auth.models import User
 
 from .forms import BlogPostForm, CategoryForm
 
@@ -19,6 +20,16 @@ def dashboard(request):
     }
     
     return render(request, 'dashboard/dashboard.html', context)
+
+#users CRUD
+def users(request):
+    users = User.objects.all()
+
+    context = {
+        'users':users
+    }
+
+    return render(request, 'dashboard/users.html', context)
 
 #Category CRUD
 def categories(request):
