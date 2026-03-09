@@ -84,11 +84,11 @@ def add_posts(request):
         form = BlogPostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)    # temporary saving of form to add author
-            post.author = request.user    # set the cuurent user as author 
+            post.author = request.user    # set the current user as author 
             post.save()
 
             title = post.title
-            post.slug = slugify(title) + '-' + str(post.pk)    # auto-generate slug for the given title
+            post.slug = slugify(title) + "-" + str(post.id)  # auto-generate slug for the given title
             
             post.save()
             return redirect('posts')
@@ -104,7 +104,30 @@ def add_posts(request):
 def edit_post(request, pk):
     post = get_object_or_404(Blog, pk=pk)
 
+    form = BlogPostForm(instance=post)
+
+    if request.method == 'POST':
+        form = BlogPostForm(request.POST, request.FILES, instance=post)
+        
+        if form.is_valid():
+            post = form.save()
+
+            title = post.title
+            post.slug = slugify(title) + "-" + str(post.id)
+            post.save()
+
+            return redirect('posts')
+
     context ={
-        'post': post
+        'post': post,
+        'form': form
     }
+
     return render(request, 'dashboard/edit_post.html', context)
+
+def delete_post(request, pk):
+    post = get_object_or_404(Blog, pk=pk)
+
+    post.delete()
+
+    return redirect('posts')
