@@ -6,6 +6,7 @@ urlpatterns = [
 
     #users CRUD
     path('users/', views.users, name='users'),
+    path('users/add', views.add_user, name='add_user'),
 
     #Category CRUD
     path('categories/', views.categories, name='categories'),
@@ -18,4 +19,4 @@ urlpatterns = [
     path('posts/add/', views.add_posts, name='add_posts'),
     path('posts/edit/<int:pk>', views.edit_post, name='edit_post'),
     path('posts/delete/<int:pk>', views.delete_post, name='delete_post'),  
-] 
+]

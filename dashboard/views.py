@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 
-from .forms import BlogPostForm, CategoryForm
+from .forms import BlogPostForm, CategoryForm, UserForm
 
 
 @login_required(login_url='login')
@@ -30,6 +30,22 @@ def users(request):
     }
 
     return render(request, 'dashboard/users.html', context)
+
+def add_user(request):
+    form = UserForm()
+
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('users')
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'dashboard/add_user.html', context)
 
 #Category CRUD
 def categories(request):
