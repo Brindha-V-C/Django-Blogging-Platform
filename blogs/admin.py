@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import About, Category, Blog, SocialLinks
+from .models import About, Category, Blog, SocialLinks, Comment
 
 #Auto-populate slug according to title
 class BlogAdmin(admin.ModelAdmin):
@@ -24,3 +24,4 @@ admin.site.register(Category)
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(About, AboutAdmin)
 admin.site.register(SocialLinks)
+admin.site.register(Comment)
