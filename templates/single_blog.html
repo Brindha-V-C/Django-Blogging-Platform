@@ -40,10 +40,11 @@
                             <br>
                         {% endfor %}
                     {% else %}
-                    No comments yet
+                    No comments yet<br>
                     {% endif %}
                     <br>
                     <div class="form-group">
+                        {% if user.is_authenticated %}
                         <form action="" method="post">
                             {% csrf_token %}
                             <div class="form-group">
@@ -51,6 +52,9 @@
                                 <input type="submit" value="Submit" class="btn btn-primary mt-2">
                             </div>
                         </form>
+                        {% else %}
+                        <p>Please <span><a href="{% url 'login' %}">login</a></span> to add a comment!</p>
+                        {% endif %}
                     </div>
                 </section>
             </article>
